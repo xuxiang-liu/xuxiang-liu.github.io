@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sovle the problem of compling simulink-hackrf on MATLAB R2019a and R2021b
+title: Solve the problem of compling simulink-hackrf on MATLAB R2019a and R2021b
 date: 2022-04-25 23:18 +0800
 author: Xuxiang Liu
 tags: [SDR]
@@ -8,7 +8,7 @@ tags: [SDR]
 
 Use Hackrf in Matlab under Windows Environemnt.
 {: .message }
-   
+
 In my previous blog i mentioned that in higher Matlab version (>R2016a) there is a problem about compling simulink-hackrf using _mex_. After reading this reply <https://github.com/kit-cel/simulink-hackrf/issues/11> and the help document of _mex_, i find the way of compling the simulink-hackrf on Matlab R2019a and R2021b.
  
 I also fork the original _simulink-hackrf_ Github project. The forked project _simulink-hackrf_xuxiang_ <https://github.com/xuxiang-liu/simulink-hackrf_xuxiang> is compatible for all Matlab versions and there is no extra installing or compling steps needed comparing to the original one. You can just follow my blog <https://xuxiang-liu.github.io/2022/04/16/firstpost.html> to process. And in the _step 12_, you only need one _make_ command. I also hope to add more interesting features in this forked project.
