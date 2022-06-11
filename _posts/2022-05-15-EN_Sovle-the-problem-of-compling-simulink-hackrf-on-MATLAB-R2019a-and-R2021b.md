@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Sovle the problem of compling simulink-hackrf on MATLAB R2019a and R2021b
+author: Xuxiang Liu
 date: 2022-05-15 23:18 +0800
 tags: [SDR]
 ---
