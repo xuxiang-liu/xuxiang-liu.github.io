@@ -2,6 +2,7 @@
 layout: post
 title: Using Matlab + HackRF in Windows Environment
 date: 2022-04-25 23:18 +0800
+author: Xuxiang Liu
 tags: [SDR]
 ---
 
