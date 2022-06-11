@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Simulink-hackrf 源码初识
+author: Xuxiang Liu
 date: 2022-05-28 23:18 +0800
 tags: [SDR]
 ---
