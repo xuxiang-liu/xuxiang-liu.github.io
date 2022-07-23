@@ -3,7 +3,7 @@ layout: post
 title: Solve the problem of compling simulink-hackrf on MATLAB R2019a and R2021b
 date: 2022-05-15 23:18 +0800
 author: Xuxiang Liu
-tags: [SDR]
+tags: [SDR,EN]
 ---
 
 Complie the simukink-hackrf in higher Matlab version.
