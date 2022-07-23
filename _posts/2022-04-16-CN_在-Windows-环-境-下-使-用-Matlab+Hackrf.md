@@ -3,7 +3,7 @@ layout: post
 title: 在 Windows 环境下使用 Matlab + Hackrf
 author: Xuxiang Liu
 date: 2022-04-16 23:18 +0800
-tags: [SDR]
+tags: [SDR,CN]
 ---
 
 在 Windows 下通过 MATLAB 使用 Hackrf.
