@@ -3,7 +3,7 @@ layout: post
 title: 解决 hackrf 在 MATLAB R2019a，R2021b 等高版本上编译问题
 author: Xuxiang Liu
 date: 2022-05-08 23:18 +0800
-tags: [SDR]
+tags: [SDR,CN]
 ---
 
 在高版本的 Matlab 中编译 simulink hackrf 
