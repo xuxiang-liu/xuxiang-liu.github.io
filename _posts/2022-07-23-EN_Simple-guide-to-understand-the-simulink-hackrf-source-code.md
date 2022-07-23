@@ -3,7 +3,7 @@ layout: post
 title: Simple guide to understand the Simulink-hackrf source code
 author: Xuxiang Liu
 date: 2022-07-23 22:40 +0800
-tags: [SDR]
+tags: [SDR,EN]
 ---
 
 A simple guide to understand the S-func in simulink, mask and source code of simulink hackrf
