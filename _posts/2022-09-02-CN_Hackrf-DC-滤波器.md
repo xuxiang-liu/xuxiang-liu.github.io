@@ -53,7 +53,7 @@ DC 消除滤波器的静态模型可以直接通过 matlab 代码进行实现，
 
 Step1. 载入 hackrf 收到的原始数据，在matlab中是以 I+jQ 的复数形式表达的，因此可以先画出原始数据的频谱，如下图所示，可以看见中间有一个很明显的毛刺，这就是 DC offset。另外从 IQ 数据也可以看出，IQ 信号并不是关于0点对称的，这就是从时域上看到的 DC offset。
 
-![image](https://user-images.githubusercontent.com/40487487/188273858-a8a4af80-efc0-4c1e-a2a6-e7981d8667ce.png)
+![image](https://user-images.githubusercontent.com/40487487/188274595-d4cc57de-c88b-4247-a8ef-8ca01d42fbbf.png)
 
 Step2. 根据上述模型实现滤波器，即当前时刻点的滤波器输出  与当前时刻点的输入 及上一个时刻点的输入 有以下关系：
 
@@ -75,7 +75,7 @@ Step2. 根据上述模型实现滤波器，即当前时刻点的滤波器输出 
 > 
 > IQ_DCremove2 = temp-temp_last;
 
-![image](https://user-images.githubusercontent.com/40487487/188274061-6afaa805-a10e-4478-b965-5f611a46fe53.png)
+![image](https://user-images.githubusercontent.com/40487487/188274604-34077bb7-8452-4f69-be44-d487a5a31777.png)
 
 可以明显看到滤波后的频谱已经没有了直流分量，另外 IQ 数据也基本是关于0对称的了。到这里，看起来我们的 DC 消除滤波器已经能很好的实现它的功能了，可是如果你有足够的好奇心的话会发现，如果我们调整滤波器的增益系数会得到什么变化呢？另外到底这个 DC滤波器的带宽是什么样的呢？
 
