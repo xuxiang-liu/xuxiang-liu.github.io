@@ -11,7 +11,9 @@ tags: [SDR,CN]
 
 搭建好树莓派上的 hackrf 环境后，我们开始来用 C 直接操作 hackrf 了。 当然我们第一步是将 hackrf 的库和我们的 project 关联起来。对于初学者，我觉得树莓派自带的 Geany  就是一个很方便的轻量级编译器工具，但是在使用 Geany 之前，我们还是用 cmake 命令行来进行编译和库的添加。下面是详细的参考步骤：
 
-1. 首先我们需要创建一个 cmake list 文件来将 hackrf library 包括到这个工程中。当然这里可以参考很多 github 上的 CMakeLists.txt。 参考 BTLE 这个开源工程 （https://github.com/JiaoXianjun/BTLE），我们裁剪出一个最简单的将 hackrf library 加入到工程中的 CMakeLists.txt 文件，如下所示：
+## CMAKEList 创建 并关联 Hacrf 库
+
+首先我们需要创建一个 cmake list 文件来将 hackrf library 包括到这个工程中。当然这里可以参考很多 github 上的 CMakeLists.txt。 参考 BTLE 这个开源工程 （https://github.com/JiaoXianjun/BTLE），我们裁剪出一个最简单的将 hackrf library 加入到工程中的 CMakeLists.txt 文件，如下所示：
 
 ~~~C
 cmake_minimum_required(VERSION 2.8)
@@ -69,7 +71,7 @@ target_link_libraries(HackRFCapture_Xuxiang ${TOOLS_LINK_LIBS} m)
 
 这样就可以把 hackrf 的库文件和我们的 project 关联起来了。
 
-2. 接下来，我们看一下如何进行 cmake 编译，整个工程的文件夹架构如下：
+## CMAKEList 在 Terminal 编译
 
 CMakeList file 放在根目录下面，同时创建 cmake 和 src 两个文件夹：其中 cmake 下创建 modules 子文件夹用于存放 FindLIBHACKRF.cmake，而 src 则用于存放 .c 源文件。当然这个文件夹架构并非必需的，只是按照这种方式会更清晰直观。另一个 build 文件夹是在后面编译过程中创建的：
 
