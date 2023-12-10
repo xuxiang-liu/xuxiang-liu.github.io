@@ -52,6 +52,8 @@ sass:
 # Replace this value and uncomment to enable Disqus
 # disqus: xxxxxx
 
+intensedebate_comments: true
+
 # Specify the author for blog posts
 author:
   name: Xuxiang Liu
