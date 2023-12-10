@@ -20,7 +20,7 @@ Matlab PLL 仿真系列-概述.
 
 Charge Pump PLL 模型主要的组成部分包括：鉴相器（PFD），电流泵（Charge Pump），环路滤波器（Loop Pass Filter），压控振荡器（VCO）和分频器（Divider），考虑小数分频的 PLL，因此这个 divider 也常常采用 Delta-Sigma Divider（DSM）。整个框图如下所示:
 
- 
+![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/3faffd8a-b340-41d7-a92e-b059946259fe)
 
 在Simulink 中，我们可以直观的看到最终的输出结果及中途每一步的过程量，这个模型本身采用了变步长的求解器来提高仿真的速度和精度。后面我们将把每个模块改写成 .m 文件，并最终通过定步长的求解方式来。
 
