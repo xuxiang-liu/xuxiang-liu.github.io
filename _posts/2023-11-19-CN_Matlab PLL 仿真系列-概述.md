@@ -3,7 +3,7 @@ layout: post
 title: Matlab PLL 仿真系列-概述
 author: Xuxiang Liu
 date: 2023-11-19 23:18 +0800
-tags: [SDR,CN]
+tags: [PLL,MATLAB,CN]
 ---
 
 Matlab PLL 仿真系列-概述.
