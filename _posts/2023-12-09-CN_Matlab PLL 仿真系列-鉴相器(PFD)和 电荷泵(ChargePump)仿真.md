@@ -30,14 +30,27 @@ PFD 的整个 .m 代码如下：
 
 ![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/78c5052a-2ce2-43ff-806f-020e7804b7ad)
 
-最后我们再来准备一个测试 PFD 的代码：首先需要定义一个采样频率 Fs，这个频率（时间）是整个仿真的系统时间。接下来，我们要定义 PFD 的两个输入时钟信号频率 fRef 和 fIn，由于 Nyquist 限制，这两个频率一定是低于采样频率 Fs 的。然后我们定义 delay 时间，再将它转换为对应的采样个数，即对 t_dalay/Ts 取整。
+对于电流泵，参考 Simulink 的模型，我们可以简单的用两个电流源及 leakage current 来表示，如下图所示：
+
+![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/6a70d5b7-bce1-4a37-81e9-39a17a2ec68c)
+
+Charge Pump 的整个 .m 代码：
+
+![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/8b1fd6b0-96d9-48c4-bd2f-f020034f08b5)
+
+最后我们再来准备一个测试 PFD 和 CP 的代码：首先需要定义一个采样频率 Fs，这个频率（时间）是整个仿真的系统时间。接下来，我们要定义 PFD 的两个输入时钟信号频率 fRef 和 fIn，由于 Nyquist 限制，这两个频率一定是低于采样频率 Fs 的。然后我们定义 delay 时间，再将它转换为对应的采样个数，即对 t_dalay/Ts 取整。
 
 完整的测试 .m 代码如下：
 
-![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/90b661e1-c3b1-446a-af81-155978d8113f)
-![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/638f1429-6f2b-457d-b746-03e564b0e4da)
+![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/45b207b5-97af-4fdd-8255-7a3a655d2b81)
+![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/10e5f6fc-065a-44ce-b14c-82f492b838a6)
+![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/6babf60a-ed34-4973-8e6c-fd6738b14125)
 
-最后我们来看一下 PFD 输入与输出的关系，我们展示前 6000个采样点的结果：
+
+最后我们来看一下 PFD 输入与输出的关系，以及对应的 charge pump 输出，我们展示前 6000个采样点的结果：
 
 ![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/c5eb615d-48d6-4b18-95c2-a4420f6032be)
+
+![image](https://github.com/xuxiang-liu/xuxiang-liu.github.io/assets/40487487/097e4097-7dda-4b82-8410-9bafe98821e0)
+
 
