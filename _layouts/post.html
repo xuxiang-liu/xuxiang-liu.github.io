@@ -57,24 +57,4 @@ layout: default
 {% endif %}
 
 	  
-	  <!--使用gitalk来当做文章的评论部分-->
-	  <div id="gitalk-container"></div>
-	   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-	   <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-	   <script src="{{ site.baseurl }}/js/md5.min.js"></script>
-	  <script>
-		   var gitalk = new Gitalk({
-			  clientID: '36d49c8165779a8e7bce',
-			  clientSecret: 'e4dcfce42e809d8b402f3e95e043e494161dbc7f',
-			  repo: 'xuxiang-liu.github.io',
-			  owner: 'xuxiang-liu',
-			  admin: ['xuxiang-liu'],
-			  id:  md5(location.href),      // Ensure uniqueness and length less than 50
-			  distractionFreeMode: true  // Facebook-like distraction free mode
-			})
 
-			gitalk.render('gitalk-container')
-		</script>
-    </div>
-  </div>
-</div>
