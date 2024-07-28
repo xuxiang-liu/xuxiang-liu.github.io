@@ -3,7 +3,7 @@ layout: post
 title: Linux Ubuntu 24.04 VPN 傻瓜配置
 author: Xuxiang Liu
 date: 2024-07-28 10:18 +0800
-tags: [杂谈，CN]
+tags: [杂谈,CN]
 ---
 
 又是很久没有更新 blog 了，最近搞了一台二手小米笔记本，整上 Ubuntu 系统来玩一玩。这个还是比 Raspery Pi 下玩起来要流畅不少...
