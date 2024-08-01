@@ -12,8 +12,11 @@ tags: [SDR,CN]
 
 “
 #include <stdio.h>
+
 #include <string.h>
+
 #include <unistd.h>
+
 #include <hackrf.h>
 
 // This function initiate hackrf, and checks its connection and ID
@@ -100,4 +103,4 @@ int main(void){
 }
 “
 
-这个简单的 C demo 实现了 hackrf 初始化和 ID、firmware version 读取
+这个简单的 C demo 实现了 hackrf 初始化和 ID、firmware version 读取，其中 hackrf_init_
