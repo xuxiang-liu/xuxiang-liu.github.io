@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 使用 GCC 编译 HackRF
-date: 2022-04-26 23:18 +0800
+date: 2024-07-28 23:18 +0800
 author: Xuxiang Liu
 tags: [SDR,CN]
 ---
