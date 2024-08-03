@@ -10,7 +10,7 @@ tags: [SDR,CN]
 
 简单的 Hackrf C 语言 Demo 如下：
 
-``` C
+```C
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
