@@ -43,8 +43,12 @@ target_link_libraries(HackRF_SA PRIVATE hackrf)
 
 3. target_link_libraries: 关联可执行文件与指定的库
 
-完成之后，点击 Load Cmake Changes，就可以看见在 hackrf_sa_main.c 中，所有与 hackrf.h 变为了绿色（如下图所示），同时所有与 hackrf 相关的函数都可以直接跳转啦！如下图所示，这个是之前在 Geany 平台上一直没有实现和困扰我的地方.
+完成之后，点击 Load Cmake Changes，就可以看见在 hackrf_sa_main.c 中，#include <hackrf.h> 变为了绿色（如下图所示），同时所有与 hackrf 相关的函数都可以直接跳转啦！如下图所示，这个是之前在 Geany 平台上一直没有实现和困扰我的地方.
 
-
+![图片](https://github.com/user-attachments/assets/9e7c5ae7-ec03-44d0-ac20-61b40c94f52c)
 
 同时采用 CLion 这个编译器，还可以方便的增加断点进行调试:如我们在 hackrf_init_and_checkID 函数中加入断点，就可以通过 debug 方式看到当前读出来的变量格式，确实是太方便了！
+
+![图片](https://github.com/user-attachments/assets/7c7ba5cf-f630-4fdd-80d4-3ec6271ed65c)
+
+
