@@ -76,3 +76,48 @@ while(keep_running){
 
 
 为了避免这种问题的出现，我们在通过线程锁(pthread_mutex) 来解决。
+
+# 构建一个带线程锁的多线程的 demo
+
+为了使用 pthread_mutex，我们首先创建一个 pthread_mutex 变量，并对其做初始化
+
+```C
+static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+```
+
+接下来我们只需要在两个线程中对变量 a 做操作的地方加锁就可以了，同时在操作完成后解锁就可以释放给另一线程使用了，修改后的两个线程函数为：
+
+producer 函数：
+```C
+void* Producer_Pthread(){
+    while(keep_running){
+        pthread_mutex_lock(&mutex);
+        for(int i=0;i<20;i++){
+            a = a+1;
+            printf("In Producer Thread, a is: %i\n",a);
+        }
+        pthread_mutex_unlock(&mutex);
+        sleep(1);
+    }
+    return 0;
+}
+```
+
+consumer 函数：
+```C
+void* Consumer_Pthread(){
+    while(keep_running){
+        pthread_mutex_lock(&mutex);
+        a=a-1;
+        printf("In Consumer Thread, a is: %i\n",a);
+        pthread_mutex_unlock(&mutex);
+        sleep(1);
+    }
+    return 0;
+}
+```
+
+我们再看一下输出，可以看到现在完全没有 consumer 线程穿插在 producer 的线程中的情况了，都是在 producer 20次对 a++ 的操作后，才会有 consumer 对 a--
+
+![图片](https://github.com/user-attachments/assets/2cc4b21b-0ec0-4b42-a09b-226fed459e5f)
+
