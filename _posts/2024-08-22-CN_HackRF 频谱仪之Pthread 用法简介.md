@@ -85,7 +85,7 @@ while(keep_running){
 static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 ```
 
-接下来我们只需要在两个线程中对变量 a 做操作的地方加锁就可以了，同时在操作完成后解锁就可以释放给另一线程使用了，修改后的两个线程函数为：
+接下来我们只需要在两个线程中对变量 a 做操作的地方加锁 (pthread_mutex_lock) 就可以了，同时在操作完成后解锁 (pthread_mutex_unlock) 就可以释放给另一线程使用了，修改后的两个线程函数为：
 
 producer 函数：
 ```C
@@ -117,7 +117,7 @@ void* Consumer_Pthread(){
 }
 ```
 
-我们再看一下输出，可以看到现在完全没有 consumer 线程穿插在 producer 的线程中的情况了，都是在 producer 20次对 a++ 的操作后，才会有 consumer 对 a--
+我们再看一下输出，可以看到现在完全没有 consumer 线程穿插在 producer 的线程中的情况了，都是在 producer 20次对 a++ 的操作后，才会有 consumer 对 a--。特别要注意的是，printf 其实也是对变量 a 的操作，所以我们的加锁和解锁操作需要包含到 printf 这里。
 
 ![图片](https://github.com/user-attachments/assets/2cc4b21b-0ec0-4b42-a09b-226fed459e5f)
 
