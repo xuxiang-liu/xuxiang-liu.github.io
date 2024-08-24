@@ -77,7 +77,7 @@ while(keep_running){
 
 为了避免这种问题的出现，我们在通过线程锁(pthread_mutex) 来解决。
 
-# 构建一个带线程锁的多线程的 demo
+## 构建一个带线程锁的多线程的 demo
 
 为了使用 pthread_mutex，我们首先创建一个 pthread_mutex 变量，并对其做初始化
 
