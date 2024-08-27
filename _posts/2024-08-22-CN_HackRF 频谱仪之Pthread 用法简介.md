@@ -19,10 +19,10 @@ HackRF 频谱仪 - Pthread 的使用
 
 要使用线程，首先需要定一个线程标识(pthread identifier), 接下来我们定义两个线程标识分别是 producer 和 consumer 线程：
 
-{% highlight ruby %}
+``` C
 static pthread_t produceer_pthread;
 static pthread_t consumer_pthread;
-{% endhighlight %}
+```
 
 接下来，我们创建两个线程中的操作，在 producer 线程中，我们每隔 1s 中进行 20次 连续的对一个变量 a 的 +1 操作，并且打印出来；在 consumer 线程中，我们每隔 1s 对同一个变量 a 进行 -1 操作，并打印出来：
 
