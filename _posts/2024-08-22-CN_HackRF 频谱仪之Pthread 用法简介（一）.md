@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HackRF 频谱仪之 Pthread 用法简介
+title: HackRF 频谱仪之 Pthread 用法简介（一）
 author: Xuxiang Liu
 date: 2024-08-22 23:18 +0800
 tags: [SDR,CN]
