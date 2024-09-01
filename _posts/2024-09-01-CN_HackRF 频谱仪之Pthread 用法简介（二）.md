@@ -97,7 +97,7 @@ void* Producer_Pthread(){pthread_cond_signal(&cond);
 }
 ```
 
-这样，最终的结果如下图所示：可以看到，当 Consumer 将 a 值减少到 -1 的时候，就会停下来等待 Producer 代码的执行。而 Producer 代码会一次将 a 累加 20次后进入休眠，接下来就会触发 Consumer 线程退出等待并持续将 a 减小到 -1。两个异步线程就实现了有序的 等待-执行 的过程。反过来，如果 Producer 比 Consumer 生成的更快，那么就需要在 Producer 中使用 pthread_cond 来等待，等待 Consumer 将 a 的值减到一定的时候，再进行 Producer 线程。
+这样，最终的结果如下图所示：可以看到，当 Consumer 将 a 值减少到 -1 的时候，就会停下来等待 Producer 代码的执行。而 Producer 代码会一次将 a 累加 20次后进入休眠，接下来就会触发 Consumer 线程退出等待并持续将 a 减小到 -1。两个异步线程就实现了有序的 等待-执行 的过程。反过来，如果 Producer 比 Consumer 生成的更快，那么就需要在 Producer 中使用 pthread_cond 来等待，等待 Consumer 将 a 的值减到一定的时候，再进行 Producer 线程。当然也可以让 Consumer 一次使用更多的 Producer 数据来 “提高” Consumer 的速率。
 
 ![图片](https://github.com/user-attachments/assets/8b9f1133-6ff6-42f4-9d26-741cfe1b4077)
 
