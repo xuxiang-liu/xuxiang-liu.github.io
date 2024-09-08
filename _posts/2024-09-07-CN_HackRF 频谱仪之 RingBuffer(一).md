@@ -143,14 +143,25 @@ void* Consumer_Pthread(){
 }
 ```
 
-接下来，我们看一下如果写入比读取慢的情况，定义 WRITE_NUM = 20, READ_NUM = 10，但 Consumer 的 sleep 时间改为 0.6s，结果如下所示。可以看到当 count = 0 之后，Consumer 进程会暂停，待 Producer 重新填入数据后再次开始读取。
+接下来，我们看一下如果写入比读取慢的情况，定义 WRITE_NUM = 20, READ_NUM = 10，但 Consumer 的 sleep 时间改为 0.6s，结果如下所示。可以看到在连续两次读取后， count = 0， 然后 Consumer 进程会暂停并等待，待 Producer 重新填入数据后再次开始读取。
 
-![图片](https://github.com/user-attachments/assets/26100557-4c90-47f1-8651-1aac5a04d145)
+![图片](https://github.com/user-attachments/assets/91671080-7285-4dda-9c8d-fbbf73f0cff9)
 
 
-另外，我们再看一下若写入比读取更快的情况，定义 WRITE_NUM = 20, READ_NUM = 10, 同时 Consumer 与 Producer 的 sleep 时间均为 1s，结果如下所示。可以看到当 head = tail 的时候，下一次对 Buffer 写入的时候，tail 的值也会加 1。而到读取的时候，tail 的值为 0,也就是从 Buffer 中第一个数进行读取，读出来的数是 30,那么我们可以从更早的结果看到（未在截图中），Buffer 中位置 0 最近一次写入的数就是 30.
+另外，我们再看一下若写入比读取更快的情况，定义 WRITE_NUM = 20, READ_NUM = 10, 同时 Consumer 与 Producer 的 sleep 时间均为 1s，结果如下所示。首先可以看到由于 Read 的数量比 Write 少且延迟一样，因此当 Read 一次后就会继续往 Buffer 中写入：
 
-![图片](https://github.com/user-attachments/assets/4f3c551c-98d0-49fc-be46-65d0d1bf49cc)
+![图片](https://github.com/user-attachments/assets/7d401b28-e9ee-4cd5-bd86-cae2dcc1a451)
+
+因此当到达 head = tail 的时候，下一次对 Buffer 写入的时 tail 的值也会加 1，这就是用新的数据替换了最老的未读取的数据，而到读取的时候，tail 的值将从新的 tail 值开始,也就是从 Buffer 中第一个未被读取过的数进行读取。
+
+下图中可以看到上一次读取结束的时候 tail 的位置在 40, head 的位置在 30, 由于接下来的写入会写入 20个数，因此 head 位置会变成 0（循环回 Buffer 的开头），而由于 Buffer 在 head 增加到 40 的时候就已经满了，因此会不断的更新最老的未读取的数据，从而 tail 的位置会从 40 变成 0。那么下一次读取的时候，就会从 0 的位置来读取（注意打印的 tail 是下一次将要读取的位置，因此当 tail = 1 的时候，就表示当前是读取的位置 0 的数据），可以看到读出来的数是 30。
+
+![图片](https://github.com/user-attachments/assets/5a137a8e-f8de-4875-a0e4-7263fdf8943d)
+
+ 那么我们再早一次的写入结果中，可以上一次往 Buffer 中位置 0 写入的数就是 30 (注意打印的 head 是下一次将要写入的位置，因此当 head = 1 的时候，显示的 inputData 就是写入到位置 0 的数字）
+
+![图片](https://github.com/user-attachments/assets/fe1702ca-aceb-4760-9eac-797d0851f99d)
+
 
 ## IMPORTANT !
 
