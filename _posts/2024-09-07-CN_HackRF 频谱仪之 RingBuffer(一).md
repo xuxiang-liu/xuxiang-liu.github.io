@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HackRF 频谱仪之 RingBuffer.
+title: HackRF 频谱仪之 RingBuffer(一)
 author: Xuxiang Liu
 date: 2024-09-07 23:18 +0800
 tags: [SDR,CN]
