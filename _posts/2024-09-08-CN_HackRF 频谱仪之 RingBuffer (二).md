@@ -13,8 +13,8 @@ HackRF 频谱仪 - 多个 RingBuffer 的使用（传地址还是变量?)
 
 下面我们以两个例子进行说明，首先我们重新写一个 ringbuffer 的 push 功能，与上一篇 blog 中的区别在于将传递的参数 ringbuffer 的地址改为 ringbuffer 变量，如下所示：
 
+```C
 {% highlight C %}
-
 void ring_buffer_push_test(RING_BUFFER ringBuffer, int data_num, int *data){
     pthread_mutex_lock(&ringBuffer.ring_mutex);
     // Process the data in buffer one by one
@@ -37,8 +37,8 @@ void ring_buffer_push_test(RING_BUFFER ringBuffer, int data_num, int *data){
     pthread_cond_signal(&ringBuffer.ring_cond);
     pthread_mutex_unlock(&ringBuffer.ring_mutex);
 }
-
 {% endhighlight %}
+```
 
 接下来，我们分别创建两个 ringbuffer 的实例，一个的 bufferNo.= 1, 另一个的 = 2.
 
