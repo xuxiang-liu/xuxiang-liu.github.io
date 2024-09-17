@@ -13,8 +13,8 @@ HackRF 频谱仪 - 多个 RingBuffer 的使用（传地址还是变量?)
 
 下面我们以两个例子进行说明，首先我们重新写一个 ringbuffer 的 push 功能，与上一篇 blog 中的区别在于将传递的参数 ringbuffer 的地址改为 ringbuffer 变量，如下所示：
 
-```C
 {% highlight C %}
+```C
 void ring_buffer_push_test(RING_BUFFER ringBuffer, int data_num, int *data){
     pthread_mutex_lock(&ringBuffer.ring_mutex);
     // Process the data in buffer one by one
@@ -37,13 +37,13 @@ void ring_buffer_push_test(RING_BUFFER ringBuffer, int data_num, int *data){
     pthread_cond_signal(&ringBuffer.ring_cond);
     pthread_mutex_unlock(&ringBuffer.ring_mutex);
 }
-{% endhighlight %}
 ```
+{% endhighlight %}
 
 接下来，我们分别创建两个 ringbuffer 的实例，一个的 bufferNo.= 1, 另一个的 = 2.
 
-```C
 {% highlight C %}
+```C
 static RING_BUFFER ringbuffer = {
         .buffer_No = 1,
         .head = 0,
@@ -61,13 +61,13 @@ static RING_BUFFER ringbuffer1 = {
         .ring_mutex = PTHREAD_MUTEX_INITIALIZER,
         .ring_cond = PTHREAD_COND_INITIALIZER
 };
-{% endhighlight %}
 ```
+{% endhighlight %}
 
 然后我们在 Producer 线程中对两个 ringbuffer 分别写入数据，我们先用上一篇 blog 中的方法，也就是传入 ringbuffer 地址的方式进行写入：
 
-```C
 {% highlight C %}
+```C
 void* Producer_Pthread() {
     while (keep_running) {
         for (int i = 0; i < WRITE_NUM; i++) {
@@ -85,8 +85,8 @@ void* Producer_Pthread() {
     }
     return 0;
 }
-{% endhighlight %}
 ```
+{% endhighlight %}
 
 运行后可以看到，当从一个 ringbuffer 切换到另一个 ringbuffer 写入的时候，head，count 都会从上一次结束的位置开始计数，这就是符合我们预期的：
 
@@ -94,8 +94,8 @@ void* Producer_Pthread() {
 
 接下来，我们再看一下用新定义的 push 方式进行写入，即传入的是 ringbuffer 变量：
 
-```C
 {% highlight C %}
+```C
 void* Producer_Pthread() {
     while (keep_running) {
         for (int i = 0; i < WRITE_NUM; i++) {
@@ -113,8 +113,8 @@ void* Producer_Pthread() {
     }
     return 0;
 }
-{% endhighlight %}
 ```
+{% endhighlight %}
 
 运行后可以看到输出结果不符合预期，每次从一个 ringbuffer 切到另一个 ringbuffer 写入的时候，head，count 都会从 0 开始，也就失去了 ringbuffer 的意义。**因此这也就是为什么多次调用时，我们需要传入地址，而非变量。**
 
