@@ -19,15 +19,16 @@ HackRF 频谱仪 - 自定义静态库 和 SDL CMakeFile
 
 我们会用到 SDL.h 和 SDL_ttf.h，前者是通用的 SDL 库，后者是处理文字渲染的 True Text Font 库，首先我们需要在 Cmakefile 中添加 SDL 和 SDL_TTF 库的链接：如之前博文所描述的，我们只需要找到 SDL 的 library 即可. 一般安装后 SDL 和 SDL_TTF 的库在 /usr/local/lib 中，因此我们在 Cmake 文件中添加以下内容即可:
 
-```Cmake
 {% highlight Cmake %}
+```Cmake
 # Library File Path
 target_link_directories(BasicFunctions PRIVATE /usr/local/lib)
 # Link Library
 target_link_libraries(BasicFunctions PRIVATE SDL2)
 target_link_libraries(BasicFunctions PRIVATE SDL2_ttf)
-{% endhighlight %}
 ```
+{% endhighlight %}
+
 可以看到，target_link_directories 指定了 library 的路径，而 target_link_libraries 则关联了需要的库文件
 
 # 自定义静态库编译和使用
@@ -36,16 +37,17 @@ target_link_libraries(BasicFunctions PRIVATE SDL2_ttf)
 
 在 Cmake 中关联自己的 .c 方式有很多，我们在这里把 SDL_GUI.c 编译为一个静态库，然后通过 SDL_GUI.h 去实现调用，因此我们在 Cmakefile 中添加以下内容：
 
-```Cmake
 {% highlight Cmake %}
+```Cmake
 # Generate a static library
 add_library(sdl_gui sdl_gui.c)
 # Include File Path
 target_include_directories(BasicFunctions PRIVATE /home/liuxuxiang/CLionProjects/BasicFunctions/include)
 # Link Library
 target_link_libraries(BasicFunctions PRIVATE sdl_gui)
-{% endhighlight %}
 ```
+{% endhighlight %}
+
 对应的几个步骤详细描述如下：
 
 Step1. 通过 add_library 将 SDL_GUI.c 编译成静态库, 生成的静态库会崔在 cmake-build-debug 文件夹中。
