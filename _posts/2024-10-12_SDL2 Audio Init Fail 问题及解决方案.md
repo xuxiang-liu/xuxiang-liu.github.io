@@ -51,5 +51,6 @@ for (int i = 0; i < numAudioDevices; i++) {
 ```
 {% endhighlight %}
 
-![Uploading 图片.png…]()
+![图片](https://github.com/user-attachments/assets/efe220ad-cf16-4a02-8fe4-118914f20f81)
+
 
