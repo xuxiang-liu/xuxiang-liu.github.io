@@ -40,9 +40,13 @@ step2. 直接输入 pip install pyhackrf2 即可完成安装; 安装完成后，
 step3. 最后连接 hackrf，通过下面简单的脚本即可判断是否成功，如果能返回 hackrf 的序列号，则说明整个环境已搭建成功
 
 ...
+
 from pyhackrf2 import HackRF
+
 device = HackRF()
+
 print(device.enumerate())
+
 ...
 
 ## 安装 pyython-hackrf
