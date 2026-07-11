@@ -53,6 +53,39 @@ print(device.enumerate())
 
 不过就在写这个 blog 的时候，发现其实维护更好的一个库是 python_hackrf，由 GvozdevLeonid 所维护，官方文档：https://pysdr.org/content/hackrf.html 所以让我们也安装一个这个库来试试吧（之前我的 ADS-B， FM 等都用的 pyhackrf2，所以在写这个 blog 的时候也想干脆用 python_hackrf 库来改写吧，顺便也理清一下之前项目逻辑，看能否提高运行的效率）
 
+step1. 同样进入 path/venv/bin, 执行 source activate 进入到 venv 环境
+
+step2. 直接从 git 拉取即可，也可以用 pip install hackrf_python, 安装完成后可以看到同样 site-packages 路径下多了 python_hackrf 和 python_hackrf-1.5.0.dist-info 
+
+step3. 最后连接 hackrf，通过下面简单的脚本即可判断是否成功，如果能返回 hackrf 的序列号，则说明整个环境已搭建成功
+
+...
+
+from python_hackrf import pyhackrf
+
+
+pyhackrf.pyhackrf_init()
+
+device = pyhackrf.pyhackrf_open()
+
+print(pyhackrf.pyhackrf_library_version())
+
+print(device.pyhackrf_board_partid_serialno_read())
+
+...
+
+## To be continued
+
+分析 hackrf_open / pyhackrf2 的 library
+
+基于 python 来玩 hackrf 吧
+
+
+
+
+
+
+
 
 
 
