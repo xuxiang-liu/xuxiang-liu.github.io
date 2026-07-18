@@ -74,11 +74,55 @@ print(device.pyhackrf_board_partid_serialno_read())
 
 ...
 
-## To be continued
+## python_hackrf RX 数据接收
 
-分析 hackrf_open / pyhackrf2 的 library
+我们第一个基于 python_hackrf 的 demo，就是简单的用 python_hackrf 来打开 HackRF 的 RX 通道，收取每一帧数据并返回每一帧数据的有效长度；这也是很多 hackrf 有趣应用的基础，一旦 HackRF 硬件层的原始数据传到了 python 当中，我们就可以用 python 做很多的算法及应用层处理了
 
-基于 python 来玩 hackrf 吧
+python_hackrf 这个库本质上是对 C 语言的 libhackrf 做的一层 Python 封装（通常基于 ctypes 或 cffi/Cython）。HackRF 硬件在底层是通过 C 语言的函数指针回调机制工作的：因此我们首先需要有一个 C 语言的 callback 回调函数，可以理解成 HACKRF 硬件驱动每次填满一个 USB 传输缓冲区，就会在C 层调用我们注册的回调函数。
+
+当然因为我们是基于 python 的开发，因此 python_hackrf 库会把这个 C 层的回调，包装成一个"胶水层"函数：pyhackrf.__rx_callback；在 C语言层实际调用的是这个函数，然后我们自己定义的 python 的 callback 函数在这个 pyhackrf.__rx_callback
+中再被调用，就实现了从 C 到 python 的转换
+
+因此我们需要按照 C 语言 libhackrf 中的参数要求来构造 python 的这个 callback 函数，pyhackrf.__rx_callback 中，对于 callback 函数的输入要求是：__rx_callback(PyHackrfDevice, ndarray,int,int)，因此我们的 callback 函数也需要保留同样的格式，所以我们的 callback 函数需要写成这样：
+
+```python
+def rx_callback(device, buffer: np.ndarray, buffer_length: int, valid_length: int):
+```
+
+
+其中 buffer 就是收到的数据，buffer_length 和 valid_length 都是数据长度，由于 HackRF 的数据是按 I 和 Q 交替的形式返回的，I 和 Q 都是 8bit 的 ADC 采样数据，因此收到的总的 IQ sample = buffer_length/2
+
+所以我们最终可以这样来在每次 rx_callback 中打印出收到的数据长度：
+
+``` python
+def rx_callback(device, buffer: np.ndarray, buffer_length: int, valid_length: int):
+
+    """
+    device: PyHackrfDevice 设备对象
+    buffer: numpy.ndarray，接收到的 IQ 数据
+    buffer_length: 缓冲区总长度
+    valid_length: 本次实际有效的数据长度
+    """
+    accepted = valid_length // 2 # I 8bits, Q 8bits
+    accepted_samples = buffer[:valid_length].astype(np.int8) # -128 to 127
+    accepted_samples = accepted_samples[0::2] + 1j * accepted_samples[1::2]  # Convert to complex type (de-interleave the IQ)
+    accepted_samples /= 128 # -1 to +1
+
+
+    print(len(accepted_samples))
+    return 0  # 返回0表示继续接收
+```
+
+最后我们在主函数中通过 set_rx_callback(rx_callback) 来注册回调函数，并通过 pyhackrf_start_rx() 来启动 RX 即可
+
+```python
+    sdr.set_rx_callback(rx_callback)
+
+    print("开始接收数据... 按 Ctrl+C 停止")
+    sdr.pyhackrf_start_rx()
+```
+
+最终打印出来的数据长度应该是 = 262144/2，其中 262144 直接返回的最原始的 byte 数量，他也是每次 USB 传输的固定的大小 256KB，对应的 sample 数就是 131072 个 IQ sample
 
 
 
